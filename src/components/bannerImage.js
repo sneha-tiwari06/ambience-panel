@@ -104,7 +104,7 @@ function BannerImage() {
       <div className="section-heading">
         <h2 className="banner-heading">Add Banner Images</h2>
       </div>
-      <div className="action-btn">
+      <div className="action-btn d-flex justify-content-between">
         <div className="add-btn">
           <Link to="/add-banner-pointers">
             <button type="button" className="w-auto btn btn-success">

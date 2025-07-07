@@ -5,9 +5,13 @@ import axiosInstance from '../utils/axiosInstnace';
 function BannerPointers() {
     const [formData, setFormdata] = useState({
         pointer1: "",
+        pointer1Detail: "",
         pointer2: "",
+        pointer2Detail: "",
         pointer3: "",
+        pointer3Detail: "",
         pointer4: "",
+        pointer4Detail: "",
     });
     const [errors, setErrors] = useState({});
     const { id } = useParams();
@@ -41,7 +45,7 @@ function BannerPointers() {
         if (!formData.pointer2.trim()) newErrors.pointer2 = "Please add a pointer 2.";
         if (!formData.pointer3.trim()) newErrors.pointer3 = "Please add pointer 3.";
         if (!formData.pointer4.trim()) newErrors.pointer4 = "Please add a pointer 4.";
-
+       
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -69,7 +73,7 @@ function BannerPointers() {
             <div className='section-heading'>
                 <h2>Banner Pointers</h2>
             </div>
-            <div className="action-btn">
+            <div className="action-btn d-flex justify-content-between">
                 <div className="add-btn">
                     <Link to="/banner-pointers">
                         <button type="button" className="w-auto btn btn-success">
@@ -98,7 +102,16 @@ function BannerPointers() {
                                 onChange={handleChange}
                             />
                             {errors.pointer1 && <small className="text-danger">{errors.pointer1}</small>}
-
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="pointer1Detail" className="form-label">Pointer 1 Detail</label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="pointer1Detail"
+                                value={formData.pointer1Detail}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     <div className='col-md-6'>
@@ -113,6 +126,16 @@ function BannerPointers() {
                             />
                             {errors.pointer2 && <small className="text-danger">{errors.pointer2}</small>}
                         </div>
+                        <div className="mb-3">
+                            <label htmlFor="pointer2Detail" className="form-label">Pointer 2 Detail</label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="pointer2Detail"
+                                value={formData.pointer2Detail}
+                                onChange={handleChange}
+                            />
+                        </div>
                     </div>
                     <div className='col-md-6'>
                         <div className="mb-3">
@@ -126,6 +149,16 @@ function BannerPointers() {
                             />
                             {errors.pointer3 && <small className="text-danger">{errors.pointer3}</small>}
                         </div>
+                        <div className="mb-3">
+                            <label htmlFor="pointer3Detail" className="form-label">Pointer 3 Detail</label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="pointer3Detail"
+                                value={formData.pointer3Detail}
+                                onChange={handleChange}
+                            />
+                        </div>
                     </div>
                     <div className='col-md-6'>
                         <div className="mb-3">
@@ -138,6 +171,16 @@ function BannerPointers() {
                                 onChange={handleChange}
                             />
                             {errors.pointer4 && <small className="text-danger">{errors.pointer4}</small>}
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="pointer4Detail" className="form-label">Pointer 4 Detail</label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="pointer4Detail"
+                                value={formData.pointer4Detail}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                 </div>
