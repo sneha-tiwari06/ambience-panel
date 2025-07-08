@@ -93,7 +93,7 @@ function AddGalleryImage() {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="text-alt" className="form-label">
-            Alternate text
+            Gallery Info Text
           </label>
           <input
             type="text"
