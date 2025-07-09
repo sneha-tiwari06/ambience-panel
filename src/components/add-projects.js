@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 
 const AddProjects = () => {
   const location = useLocation();
@@ -140,26 +141,36 @@ const AddProjects = () => {
   };
   
 
-  return (
-    <div className="mt-4">
-      <div className="section-heading">
-        <h2>{editMode ? "Edit Project" : "Add Project"}</h2>
-      </div>
+  const addAreaLocationField = () => {
+    setAreas([...areas, { value: "" }]);
+    setLocations([...locations, { value: "" }]);
+  };
 
-      <div className="action-btn d-grid gap-2 d-md-flex justify-content-md-end">
-        <div className="back-btn">
-          <Link to="/projects">
-            <button type="button" className="w-auto btn btn-primary">
-              Back
-            </button>
-          </Link>
-        </div>
-      </div>
+  const removeAreaLocationField = (index) => {
+    setAreas(areas.filter((_, i) => i !== index));
+    setLocations(locations.filter((_, i) => i !== index));
+  };
+
+  return (
+    <Box sx={{ mt: 4, maxWidth: '100%', mx: "auto", background: "#fff", p: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Box sx={{ mb: 3, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Box>
+          <h2 style={{ margin: 0 }}>{editMode ? "Edit Project" : "Add Project"}</h2>
+          <span style={{ color: "#888" }}>
+            {editMode ? "Update your project details" : "Fill in the details to add a new project"}
+          </span>
+        </Box>
+        <Link to="/projects">
+          <Button variant="contained" color="primary" sx={{ borderRadius: 2, px: 3 }}>
+            Back
+          </Button>
+        </Link>
+      </Box>
       <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-md-6">
+        <Box className="row" sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+          <Box className="col-md-6" sx={{ flex: 1, minWidth: 280 }}>
             <div className="mb-3">
-              <label htmlFor="projectName" className="form-label">Project Name</label>
+              <label htmlFor="projectName" className="form-label" style={{ fontWeight: 500 }}>Project Name</label>
               <input
                 type="text"
                 name="projectName"
@@ -167,88 +178,36 @@ const AddProjects = () => {
                 placeholder="Project Name"
                 value={projectData.projectName}
                 onChange={handleInputChange}
+                style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10 }}
               />
               {errors.projectName && <small className="text-danger">{errors.projectName}</small>}
             </div>
-          </div>
-          <div className="col-md-6">
+          </Box>
+          <Box className="col-md-6" sx={{ flex: 1, minWidth: 280 }}>
             <div className="mb-3">
-              <label htmlFor="image" className="form-label">Add Project Image</label>
+              <label htmlFor="image" className="form-label" style={{ fontWeight: 500 }}>Add Project Image</label>
               <input
                 type="file"
                 name="image"
                 className="form-control"
                 onChange={handleFileChange}
+                style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10 }}
               />
               {errors.image && <small className="text-danger">{errors.image}</small>}
             </div>
             {imagePreview && (
-              <div className="image-preview">
+              <Box className="image-preview" sx={{ mt: 1, mb: 2 }}>
                 <img
                   src={imagePreview}
                   alt="Project Preview"
-                  style={{ width: "100px", maxWidth: "200px", marginBottom: "20px" }}
+                  style={{ width: "120px", borderRadius: 8, border: "1px solid #eee" }}
                 />
-              </div>
+              </Box>
             )}
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="category" className="form-label">Category</label>
-            <select
-              name="category"
-              className="form-control category"
-              value={projectData.category}
-              onChange={handleInputChange}
-            >
-              <option value="">Select Category</option>
-              <option value="ongoing">Ongoing Projects</option>
-              <option value="completed">Completed Projects</option>
-            </select>
-            {errors.category && <small className="text-danger">{errors.category}</small>}
-          </div>
-          <div className="col-md-12">
-             <label htmlFor="area" className="form-label">Add Area</label>
-            {areas.map((area, index) => (
-              <div className="mb-3 d-flex align-items-center" key={index}>
-                <input
-                  type="number"
-                  name={`area-${index}`}
-                  className="form-control"
-                  placeholder={`Area ${index + 1} (sq.ft)`}
-                  value={area.value}
-                  onChange={(e) => handleAreaChange(index, e.target.value)}
-                />
-                <button
-                  type="button"
-                  className="w-auto btn btn-danger ms-2"
-                  onClick={() => removeAreaField(index)}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-            <button type="button" className="w-auto btn btn-primary m-0" onClick={addAreaField}>
-              +
-            </button>
-            {errors.area && <small className="text-danger d-block">{errors.area}</small>}
-          </div>
-          <div className="col-md-6">
+          </Box>
+           <Box className="col-md-6" sx={{ flex: 1, minWidth: 280 }}>
             <div className="mb-3">
-              <label htmlFor="workBy" className="form-label">Work By</label>
-              <input
-                type="text"
-                name="workBy"
-                className="form-control"
-                placeholder="Work By"
-                value={projectData.workBy}
-                onChange={handleInputChange}
-              />
-              {errors.workBy && <small className="text-danger">{errors.workBy}</small>}
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="mb-3">
-              <label htmlFor="altText" className="form-label">Alternate Text</label>
+              <label htmlFor="altText" className="form-label" style={{ fontWeight: 500 }}>Alternate Text</label>
               <input
                 type="text"
                 name="altText"
@@ -256,42 +215,105 @@ const AddProjects = () => {
                 placeholder="Alt Text"
                 value={projectData.altText}
                 onChange={handleInputChange}
+                style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10 }}
               />
               {errors.altText && <small className="text-danger">{errors.altText}</small>}
             </div>
-          </div>
-          <div className="col-md-12">
-             <label htmlFor="location" className="form-label">Add Locations</label>
-            {locations.map((location, index) => (
-              <div className="mb-3 d-flex align-items-center" key={index}>
+          </Box>
+          <Box className="col-md-6" sx={{ flex: 1, minWidth: 280 }}>
+            <div className="mb-3">
+              <label htmlFor="workBy" className="form-label" style={{ fontWeight: 500 }}>Work By</label>
+              <input
+                type="text"
+                name="workBy"
+                className="form-control"
+                placeholder="Work By"
+                value={projectData.workBy}
+                onChange={handleInputChange}
+                style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10 }}
+              />
+              {errors.workBy && <small className="text-danger">{errors.workBy}</small>}
+            </div>
+          </Box>
+         
+          <Box className="col-md-6" sx={{ flex: 1, minWidth: 280 }}>
+            <label htmlFor="category" className="form-label" style={{ fontWeight: 500 }}>Category</label>
+            <select
+              name="category"
+              className="form-select category"
+              value={projectData.category}
+              onChange={handleInputChange}
+              style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10 }}
+            >
+              <option value="">Select Category</option>
+              <option value="ongoing">Ongoing Projects</option>
+              <option value="completed">Completed Projects</option>
+            </select>
+            {errors.category && <small className="text-danger">{errors.category}</small>}
+          </Box>
+          <Box className="col-md-12" sx={{ width: "100%" }}>
+            <label className="form-label" style={{ fontWeight: 500 }}>Area(s) & Location(s)</label>
+            {areas.map((area, index) => (
+              <Box key={index} sx={{ display: "flex", gap: 2, alignItems: "center", mb: 2 }}>
+                <input
+                  type="number"
+                  name={`area-${index}`}
+                  className="form-control"
+                  placeholder={`Area ${index + 1} (sq.ft)`}
+                  value={area.value}
+                  onChange={(e) => handleAreaChange(index, e.target.value)}
+                  style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10, maxWidth: 180 }}
+                />
                 <input
                   type="text"
                   name={`location-${index}`}
                   className="form-control"
                   placeholder={`Location ${index + 1}`}
-                  value={location.value}
+                  value={locations[index]?.value || ""}
                   onChange={(e) => handleLocationChange(index, e.target.value)}
+                  style={{ borderRadius: 8, border: "1px solid #ccc", padding: 10, maxWidth: 220 }}
                 />
-                <button
-                  type="button"
-                  className="w-auto btn btn-danger ms-2"
-                  onClick={() => removeLocationField(index)}
-                >
-                  X
-                </button>
-              </div>
+                {areas.length > 1 && (
+                  <Button
+                    type="button"
+                    color="error"
+                    variant="outlined"
+                    sx={{ minWidth: 36, height: 36, borderRadius: 2 }}
+                    onClick={() => removeAreaLocationField(index)}
+                  >
+                    X
+                  </Button>
+                )}
+              </Box>
             ))}
-            <button type="button" className="w-auto btn btn-primary m-0" onClick={addLocationField}>
-              +
-            </button>
-            {errors.location && <small className="text-danger d-block">{errors.location}</small>}
-          </div>
-        </div>
-        <button type="submit" className="w-auto btn btn-primary">
-          {editMode ? "Update Project" : "Add Project"}
-        </button>
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: 2, px: 3, mt: 1 }}
+              onClick={addAreaLocationField}
+            >
+              + Add Area & Location
+            </Button>
+            {(errors.area || errors.location) && (
+              <small className="text-danger d-block">
+                {errors.area || errors.location}
+              </small>
+            )}
+          </Box>
+        </Box>
+        <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ borderRadius: 2, px: 4, fontWeight: 600, fontSize: 16 }}
+          >
+            {editMode ? "Update Project" : "Add Project"}
+          </Button>
+        </Box>
       </form>
-    </div>
+    </Box>
   );
 };
 

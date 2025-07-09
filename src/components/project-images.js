@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Avatar } from "@mui/material";
+import { Box, Avatar, Button } from "@mui/material";
 import { Add, Delete, PhotoLibrary } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
@@ -17,6 +17,8 @@ function ProjectImage() {
   const [thumbnailId, setThumbnailId] = useState(null);
   const [captionDialog, setCaptionDialog] = useState({ open: false, image: null, caption: '' });
   const [priorityLoading, setPriorityLoading] = useState(false);
+  const [altText, setAltText] = useState('');
+  const [altTextLoading, setAltTextLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchImages = async () => {
@@ -37,6 +39,13 @@ function ProjectImage() {
   useEffect(() => {
     fetchImages();
   }, [id]);
+
+  // Set altText when images load
+  useEffect(() => {
+    if (images.length > 0) {
+      setAltText(images[0].altText || '');
+    }
+  }, [images]);
 
   const handleThumbnailToggle = async (imageId) => {
     try {
@@ -100,6 +109,22 @@ function ProjectImage() {
     }
   };
 
+  // Handler to update altText in DB
+  const handleAltTextSave = async () => {
+    if (!images[0]) return;
+    setAltTextLoading(true);
+    try {
+      await axiosInstance.put(`/gallery-image/${images[0]._id}`, {
+        altText,
+      });
+      fetchImages();
+    } catch (error) {
+      console.error("Error updating alt text:", error);
+    } finally {
+      setAltTextLoading(false);
+    }
+  };
+
   const columns = [
     {
       id: 'index',
@@ -137,21 +162,32 @@ function ProjectImage() {
       ),
       minWidth: 200,
     },
-    {
-      id: 'priority',
-      label: 'Priority',
-      render: (row) => (
-        <input
-          type="number"
-          value={row.priority}
-          min={1}
-          style={{ width: 60 }}
-          disabled={priorityLoading}
-          onChange={(e) => handlePriorityChange(row._id, e.target.value)}
-        />
-      ),
-      minWidth: 100,
-    },
+   {
+  id: 'priority',
+  label: 'Priority',
+  render: (row) => (
+    <input
+      type="number"
+      value={row.priority}
+      min={1}
+      style={{ width: 60 }}
+      disabled={priorityLoading}
+      onKeyDown={(e) => {
+        if (e.key === '-' || e.key === 'e') {
+          e.preventDefault(); // prevent negative sign and exponential input
+        }
+      }}
+      onChange={(e) => {
+        const value = parseInt(e.target.value, 10);
+        if (value >= 1) {
+          handlePriorityChange(row._id, value);
+        }
+      }}
+    />
+  ),
+  minWidth: 100,
+},
+
     // {
     //   id: 'thumbnail',
     //   label: 'Thumbnail Status',
@@ -212,6 +248,60 @@ function ProjectImage() {
         actions={actions}
       />
 
+      {/* Alt Text Editor for First Image */}
+      {images.length > 0 && (
+        <Box
+          sx={{
+            mb: 3,
+            p: 2,
+            border: '1px solid #e0e0e0',
+            borderRadius: 2,
+            background: '#fafbfc',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            maxWidth: '100%',
+          }}
+        >
+          <label style={{ fontWeight: 500, color: '#555' }}>
+           Edit Gallery Info:
+          </label>
+          <textarea
+            value={altText}
+            onChange={e => setAltText(e.target.value)}
+            rows={2}
+            style={{
+              width: '100%',
+              padding: 10,
+              borderRadius: 6,
+              border: '1px solid #ccc',
+              fontSize: 16,
+              fontFamily: 'inherit',
+              resize: 'vertical',
+              background: '#fff',
+              color: '#222',
+            }}
+            disabled={altTextLoading}
+            placeholder="Enter alt text for the first image..."
+          />
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+            <Button
+              variant="contained"
+              onClick={handleAltTextSave}
+              disabled={altTextLoading || !altText.trim()}
+              sx={{ 
+                  borderRadius: 2,
+                  px: 3,
+                  fontWeight: 500,
+                  ml: 1,
+                }}
+            >
+              {altTextLoading ? 'Saving...' : 'Save'}
+            </Button>
+          </Box>
+        </Box>
+      )}
+
       <DataTable
         columns={columns}
         data={images}
@@ -243,18 +333,10 @@ function ProjectImage() {
                 style={{ width: '100%', padding: 8, marginBottom: 8 }}
                 required
               />
-              {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-                <button type="button" onClick={closeCaptionDialog} className="btn btn-secondary">
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Save Caption
-                </button>
-              </Box> */}
             </form>
           }
           severity="info"
-          hideActions // Hide default dialog actions, use form buttons instead
+          hideActions
         />
       )}
     </Box>
