@@ -247,61 +247,6 @@ function ProjectImage() {
         breadcrumbs={breadcrumbs}
         actions={actions}
       />
-
-      {/* Alt Text Editor for First Image */}
-      {images.length > 0 && (
-        <Box
-          sx={{
-            mb: 3,
-            p: 2,
-            border: '1px solid #e0e0e0',
-            borderRadius: 2,
-            background: '#fafbfc',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 1,
-            maxWidth: '100%',
-          }}
-        >
-          <label style={{ fontWeight: 500, color: '#555' }}>
-           Edit Gallery Info:
-          </label>
-          <textarea
-            value={altText}
-            onChange={e => setAltText(e.target.value)}
-            rows={2}
-            style={{
-              width: '100%',
-              padding: 10,
-              borderRadius: 6,
-              border: '1px solid #ccc',
-              fontSize: 16,
-              fontFamily: 'inherit',
-              resize: 'vertical',
-              background: '#fff',
-              color: '#222',
-            }}
-            disabled={altTextLoading}
-            placeholder="Enter alt text for the first image..."
-          />
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
-            <Button
-              variant="contained"
-              onClick={handleAltTextSave}
-              disabled={altTextLoading || !altText.trim()}
-              sx={{ 
-                  borderRadius: 2,
-                  px: 3,
-                  fontWeight: 500,
-                  ml: 1,
-                }}
-            >
-              {altTextLoading ? 'Saving...' : 'Save'}
-            </Button>
-          </Box>
-        </Box>
-      )}
-
       <DataTable
         columns={columns}
         data={images}

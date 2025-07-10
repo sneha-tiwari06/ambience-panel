@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  // baseURL: 'https://ambience.in/apis/api',
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://ambience.in/apis/api',
+  // baseURL: 'http://localhost:5000/api',
 
   headers: {
     'Content-Type': 'application/json'
@@ -33,8 +33,8 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-// export const BASE_IMAGE_URL = 'https://ambience.in/apis';
-export const BASE_IMAGE_URL = 'http://localhost:5000';
+export const BASE_IMAGE_URL = 'https://ambience.in/apis';
+// export const BASE_IMAGE_URL = 'http://localhost:5000';
 
 
 export default axiosInstance;

@@ -5,8 +5,8 @@ import axiosInstance from "../utils/axiosInstnace";
 
 function AddGalleryImage() {
   const { id } = useParams();
-  const [altText, setAltText] = useState('');
-  const [projectName, setProjectName] = useState('');
+  // const [altText, setAltText] = useState('');
+  // const [projectName, setProjectName] = useState('');
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -17,12 +17,12 @@ function AddGalleryImage() {
     if (images.length === 0) {
       newErrors.images = "Please upload at least one image.";
     }
-    if (!altText.trim()) {
-      newErrors.altText = "Alternate text is required.";
-    }
-    if (!projectName.trim()) {
-      newErrors.projectName = "Project Name is required.";
-    }
+    // if (!altText.trim()) {
+    //   newErrors.altText = "Alternate text is required.";
+    // }
+    // if (!projectName.trim()) {
+    //   newErrors.projectName = "Project Name is required.";
+    // }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -35,8 +35,8 @@ function AddGalleryImage() {
     setLoading(true);
     const formData = new FormData();
     formData.append('projectId', id);
-    formData.append('altText', altText);
-    formData.append('projectName', projectName);
+    // formData.append('altText', altText);
+    // formData.append('projectName', projectName);
 
     Array.from(images).forEach((file) => {
       formData.append('images', file);
@@ -55,17 +55,7 @@ function AddGalleryImage() {
     }
   };
 
-  const handleInputChange = (field, value) => {
-    if (errors[field]) {
-      setErrors((prevErrors) => ({ ...prevErrors, [field]: undefined }));
-    }
-    if (field === "altText") {
-      setAltText(value);
-    }
-    if (field === "projectName") {
-      setProjectName(value);
-    }
-  };
+
 
   const handleFileChange = (e) => {
     setImages(e.target.files);
@@ -104,7 +94,7 @@ function AddGalleryImage() {
         </div>
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="text-alt" className="form-label" style={{ fontWeight: 500, color: "#444" }}>
             Gallery Info Text
           </label>
@@ -124,8 +114,8 @@ function AddGalleryImage() {
             placeholder="Enter alternate text for gallery images"
           ></textarea>
           {errors.altText && <small className="text-danger">{errors.altText}</small>}
-        </div>
-        <div className="mb-3">
+        </div> */}
+        {/* <div className="mb-3">
           <label htmlFor="projectName" className="form-label" style={{ fontWeight: 500, color: "#444" }}>
             Project Name
           </label>
@@ -145,7 +135,7 @@ function AddGalleryImage() {
             placeholder="Enter project name"
           />
           {errors.projectName && <small className="text-danger">{errors.projectName}</small>}
-        </div>
+        </div> */}
         <div className="mb-3">
           <label htmlFor="formFileMultiple" className="form-label" style={{ fontWeight: 500, color: "#444" }}>
             Project Images
