@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstnace";
 
 function BannerImage() {
-  const [bannerImages, setBannerImages] = useState([]);
+  const [_bannerImages, setBannerImages] = useState([]);
   const [image, setImage] = useState(null);
   const [mobileImage, setMobileImage] = useState(null);
   const [tabImage, setTabImage] = useState(null);

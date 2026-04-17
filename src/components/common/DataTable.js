@@ -8,18 +8,18 @@ import {
   TableRow,
   TablePagination,
   TableSortLabel,
-  Paper,
+  
   Box,
   TextField,
   InputAdornment,
   Typography,
-  Chip,
+ 
   IconButton,
   Tooltip,
   Card,
   CardContent,
 } from '@mui/material';
-import { Search, FilterList, ViewColumn } from '@mui/icons-material';
+import { Search, FilterList } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const DataTable = ({

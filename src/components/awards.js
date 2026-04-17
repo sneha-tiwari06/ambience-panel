@@ -1,7 +1,7 @@
 // src/components/Awards.js
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Avatar } from "@mui/material";
-import { Add, Edit, Delete, Star } from "@mui/icons-material";
+import { Add, Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";

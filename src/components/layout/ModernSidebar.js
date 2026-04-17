@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import {
   Drawer,
   List,
@@ -33,7 +33,6 @@ import {
   ExpandLess,
   ExpandMore,
   Logout,
-  Settings,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -60,28 +60,28 @@ const AddProjects = () => {
     updatedAreas[index].value = isNaN(numericValue) ? "" : numericValue;
     setAreas(updatedAreas);
   };
-  const addAreaField = () => {
-    setAreas([...areas, { value: "" }]);
-  };
+  // const addAreaField = () => {
+  //   setAreas([...areas, { value: "" }]);
+  // };
 
-  const removeAreaField = (index) => {
-    const updatedAreas = areas.filter((_, i) => i !== index);
-    setAreas(updatedAreas);
-  };
+  // const removeAreaField = (index) => {
+  //   const updatedAreas = areas.filter((_, i) => i !== index);
+  //   setAreas(updatedAreas);
+  // };
   const handleLocationChange = (index, value) => {
     const updatedLocations = [...locations];
     updatedLocations[index].value = value;
     setLocations(updatedLocations); // Fix here
   };
   
-  const addLocationField = () => {
-    setLocations([...locations, { value: "" }]);
-  };
+  // const addLocationField = () => {
+  //   setLocations([...locations, { value: "" }]);
+  // };
 
-  const removeLocationField = (index) => {
-    const updatedLocation = locations.filter((_, i) => i !== index);
-    setLocations(updatedLocation);
-  };
+  // const removeLocationField = (index) => {
+  //   const updatedLocation = locations.filter((_, i) => i !== index);
+  //   setLocations(updatedLocation);
+  // };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

@@ -10,7 +10,6 @@ import {
   Typography,
   Alert,
   Container,
-  Avatar,
   Tabs,
   Tab,
   InputAdornment,
