@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstnace";
 
 function BannerImage() {
-  const [_bannerImages, setBannerImages] = useState([]);
   const [image, setImage] = useState(null);
   const [mobileImage, setMobileImage] = useState(null);
   const [tabImage, setTabImage] = useState(null);
@@ -16,14 +15,6 @@ function BannerImage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const fetchBannerImages = async () => {
-    try {
-      const response = await axiosInstance.get("/banner-images/");
-      setBannerImages(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const handleImageChange = (e, type) => {
     const file = e.target.files[0];
     if (type === "desktop") {
@@ -67,7 +58,6 @@ function BannerImage() {
       }
       navigate('/banner-image');
       resetForm();
-      fetchBannerImages();
     } catch (error) {
       console.error(error);
       alert("Error uploading image.");
@@ -87,7 +77,6 @@ function BannerImage() {
   };
 
   useEffect(() => {
-    fetchBannerImages();
     if (location.state?.image) {
       const { image: editImage } = location.state;
       setAltText(editImage.altText);

@@ -14,14 +14,13 @@ function ProjectImage() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteDialog, setDeleteDialog] = useState({ open: false, id: null });
-  const [_thumbnailId, setThumbnailId] = useState(null);
   const [captionDialog, setCaptionDialog] = useState({
     open: false,
     image: null,
     caption: "",
   });
   const [priorityLoading, setPriorityLoading] = useState(false);
-  const [_altText, setAltText] = useState("");
+  // const [altText, setAltText] = useState("");
   // const [altTextLoading, setAltTextLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -29,14 +28,6 @@ const fetchImages = useCallback(async () => {
   try {
     const response = await axiosInstance.get(`/gallery-image/${id}`);
     setImages(response.data);
-
-    const existingThumbnail = response.data.find(
-      (image) => image.isThumbnail
-    );
-
-    if (existingThumbnail) {
-      setThumbnailId(existingThumbnail._id);
-    }
   } catch (error) {
     console.error("Error fetching project images:", error);
   } finally {
@@ -49,25 +40,11 @@ useEffect(() => {
 }, [fetchImages]);
 
   // Set altText when images load
-  useEffect(() => {
-    if (images.length > 0) {
-      setAltText(images[0].altText || "");
-    }
-  }, [images]);
-
-  // const handleThumbnailToggle = async (imageId) => {
-  //   try {
-  //     const response = await axiosInstance.put(
-  //       `/gallery-image/${imageId}/toggle-thumbnail`,
-  //     );
-  //     if (response.data.image) {
-  //       setThumbnailId(response.data.image._id);
-  //     }
-  //     fetchImages();
-  //   } catch (error) {
-  //     console.error("Error updating thumbnail status:", error);
+  // useEffect(() => {
+  //   if (images.length > 0) {
+  //     setAltText(images[0].altText || "");
   //   }
-  // };
+  // }, [images]);
 
   const handleDelete = async () => {
     try {
