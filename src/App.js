@@ -36,7 +36,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router basename="/admin-panel-new">
+      <Router>
         <div className="App">
           <Routes>
             <Route path="/" element={<Login />} />
