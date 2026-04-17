@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance from "../utils/axiosInstnace";
 
 function BannerImage() {
   const [bannerImages, setBannerImages] = useState([]);
@@ -93,9 +93,9 @@ function BannerImage() {
       setAltText(editImage.altText);
       setBannerText(editImage.bannerText);
       setCurrentId(editImage._id);
-      setPreviewUrl(`${BASE_IMAGE_URL}${editImage.imageUrl}`);
-      setPreviewMobileUrl(`${BASE_IMAGE_URL}${editImage.mobileImageUrl}`);
-      setPreviewTabUrl(`${BASE_IMAGE_URL}${editImage.tabImageUrl}`);
+      setPreviewUrl(`${editImage.imageUrl}`);
+      setPreviewMobileUrl(`${editImage.mobileImageUrl}`);
+      setPreviewTabUrl(`${editImage.tabImageUrl}`);
     }
   }, [location.state]);
 

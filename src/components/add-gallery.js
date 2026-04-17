@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance  from "../utils/axiosInstnace";
 
 function AddGallery() {
   const [projectName, setProjectName] = useState("");
@@ -31,7 +31,7 @@ function AddGallery() {
           setMetaKeywords(data.metaKeywords || "");
           setMetaDescription(data.metaDescription || "");
           setGalleryOverview(data.galleryOverview || "");
-          setPreviewUrl(`${BASE_IMAGE_URL}${data.image}`);
+          setPreviewUrl(`${data.image}`);
         })
         .catch((err) => {
           console.error("Failed to fetch gallery item", err);

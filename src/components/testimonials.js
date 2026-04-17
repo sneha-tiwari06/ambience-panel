@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Avatar } from "@mui/material";
 import { Add, Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance  from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";
 import DataTable from "./common/DataTable";
 import ActionButton from "./common/ActionButton";
@@ -64,7 +64,7 @@ function Testimonials() {
       label: 'Logo',
       render: (row) => (
         <Avatar
-          src={`${BASE_IMAGE_URL}${row.logo}`}
+          src={`${row.logo}`}
           alt={row.logoAltText}
           sx={{ width: 60, height: 60 }}
           variant="rounded"

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Avatar } from "@mui/material";
 import { Add, Edit, Delete, Visibility, AddPhotoAlternate } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";
 import DataTable from "./common/DataTable";
 import ActionButton from "./common/ActionButton";
@@ -52,7 +52,7 @@ function Gallery() {
       label: 'Image',
       render: (row) => (
         <Avatar
-          src={`${BASE_IMAGE_URL}${row.image}`}
+          src={`${row.image}`}
           alt="Gallery thumbnail"
           sx={{ width: 60, height: 60 }}
           variant="rounded"

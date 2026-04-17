@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"; 
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance  from "../utils/axiosInstnace";
 
 function AddAwards() {
   const [image, setImage] = useState(null);
@@ -19,8 +19,8 @@ function AddAwards() {
         try {
           const response = await axiosInstance.get(`/awards/${id}`);
           const award = response.data;
-          setExistingImage(`${BASE_IMAGE_URL}/${award.image}`);
-          setExistingCertificateImage(`${BASE_IMAGE_URL}/${award.certificateImage}`); // Fetch certificate image
+          setExistingImage(`${award.image}`);
+          setExistingCertificateImage(`${award.certificateImage}`); // Fetch certificate image
           setAltText(award.altText);
         } catch (error) {
           console.error('Error fetching award data:', error);

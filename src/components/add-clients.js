@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"; 
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance  from "../utils/axiosInstnace";
 
 function AddClients() {
   const [image, setImage] = useState(null);
@@ -17,7 +17,7 @@ function AddClients() {
           const response = await axiosInstance.get(`/clients/${id}`);
           const clientData = response.data;
           setAltText(clientData.altText); 
-          setExistingImage(`${BASE_IMAGE_URL}/${clientData.image}`); 
+          setExistingImage(`${clientData.image}`); 
         } catch (error) {
           console.error("Error fetching client data:", error);
         }

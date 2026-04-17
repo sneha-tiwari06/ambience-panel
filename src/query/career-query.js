@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
-import axiosInstance, { BASE_IMAGE_URL } from "../utils/axiosInstnace";
+import axiosInstance  from "../utils/axiosInstnace";
 import PageHeader from "../components/common/PageHeader";
 import DataTable from "../components/common/DataTable";
 import ActionButton from "../components/common/ActionButton";
@@ -60,7 +60,7 @@ function CareerQuery() {
       render: (row) => (
         <ActionButton
           icon={<Visibility />}
-          onClick={() => handleViewResume(`${BASE_IMAGE_URL}/${row.car_resume}`)}
+          onClick={() => handleViewResume(`${row.car_resume}`)}
           size="small"
         >
           View Resume
