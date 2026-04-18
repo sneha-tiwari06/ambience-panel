@@ -10,8 +10,7 @@ import {
   Typography,
   Alert,
   Container,
-  Tabs,
-  Tab,
+
   InputAdornment,
   IconButton,
 } from "@mui/material";
@@ -174,7 +173,7 @@ function Login() {
                 </Box>
               </motion.div>
 
-              <Tabs
+              {/* <Tabs
                 value={tabValue}
                 onChange={(e, newValue) => setTabValue(newValue)}
                 centered
@@ -190,7 +189,7 @@ function Login() {
               >
                 <Tab label="Sign In" />
                 <Tab label="Register" />
-              </Tabs>
+              </Tabs> */}
 
               {errorMessage && (
                 <motion.div
