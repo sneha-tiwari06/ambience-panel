@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance  from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc }  from "../utils/axiosInstnace";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 
@@ -32,7 +32,7 @@ const AddProjects = () => {
         image: null,
         category: image.category || "",
       });
-      setImagePreview(`${image.imagePath}`);
+      setImagePreview(getImageSrc(image.imagePath));
     setEditId(image._id);
     setEditMode(true);
     if (image.areas) {

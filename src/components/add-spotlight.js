@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc } from "../utils/axiosInstnace";
 
 function AddSpotlight() {
   const [imageUpload, setImageUpload] = useState(null);
@@ -61,7 +61,7 @@ function AddSpotlight() {
             pointer3: spotlight.spotlightPointer3,
           });
           setCurrentId(spotlight._id);
-          setPreviewUrl(`${spotlight.imageUrl}`);
+          setPreviewUrl(getImageSrc(spotlight.imageUrl));
         } catch (error) {
           console.error(error);
         }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axiosInstance  from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc }  from "../utils/axiosInstnace";
 
 const AddTestimonials = () => {
   const [logo, setLogo] = useState(null);
@@ -147,7 +147,7 @@ const AddTestimonials = () => {
               />
               {existingTestimonial && (
                 <img
-                  src={`${existingTestimonial.logo}`}
+                  src={getImageSrc(existingTestimonial.logo)}
                   alt={existingTestimonial.logoAltText}
                   style={{ width: "100px", marginTop: "10px" }}
                 />
@@ -166,7 +166,7 @@ const AddTestimonials = () => {
               />
               {existingTestimonial && (
                 <img
-                  src={`${existingTestimonial.image}`}
+                  src={getImageSrc(existingTestimonial.image)}
                   alt={existingTestimonial.imageAltText}
                   style={{ width: "100px", marginTop: "10px" }}
                 />

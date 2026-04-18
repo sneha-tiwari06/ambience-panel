@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Avatar } from "@mui/material";
 import { Add, Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import axiosInstance  from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc }  from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";
 import DataTable from "./common/DataTable";
 import ActionButton from "./common/ActionButton";
@@ -79,7 +79,7 @@ function Projects() {
       label: 'Image',
       render: (row) => (
         <Avatar
-          src={`${row.imagePath}`}
+          src={getImageSrc(row.imagePath)}
           alt={row.altText}
           sx={{ width: 60, height: 60 }}
           variant="rounded"

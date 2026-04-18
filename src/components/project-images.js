@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Box, Avatar } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc } from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";
 import DataTable from "./common/DataTable";
 import ActionButton from "./common/ActionButton";
@@ -123,7 +123,7 @@ useEffect(() => {
       label: "Image",
       render: (row) => (
         <Avatar
-          src={`${row.originalImagePath}`}
+          src={getImageSrc(row.originalImagePath)}
           alt={row.altText}
           sx={{ width: 80, height: 60 }}
           variant="rounded"

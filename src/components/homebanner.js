@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Avatar } from "@mui/material";
 import { Add, Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstnace";
+import axiosInstance, { getImageSrc } from "../utils/axiosInstnace";
 import PageHeader from "./common/PageHeader";
 import DataTable from "./common/DataTable";
 import ActionButton from "./common/ActionButton";
@@ -54,7 +54,7 @@ function HomeBanner() {
       label: 'Banner Image',
       render: (row) => (
         <Avatar
-          src={`${row.imageUrl}`}
+          src={getImageSrc(row.imageUrl)}
           alt={row.altText}
           sx={{ width: 80, height: 60 }}
           variant="rounded"
